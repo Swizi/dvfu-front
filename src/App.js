@@ -18,7 +18,7 @@ function App() {
   if (loading) {
     return (
       <div className="loading_block">
-        <h3 className="loading_header">YummiDVFU</h3>
+        <h3 className="loading_header">DVFU.Food</h3>
         <CircularProgress className="circular_progress" />
       </div>
     );

@@ -17,8 +17,10 @@ function getUserInfo()
 	  'fname' => $data['firstname'],
 	  'lname' => $data['lastname'],
 	  'tel' => $data['telephone_number'],
-		'smLink' => $data['sm_link']
+		'sm_link' => $data['sm_link']
 	];
+	$query = "SELECT verification_code FROM tg_bots WHERE user_id = {$id};";
+	$info['verification_code'] = mqagd($query)['verification_code'];
 
 	makeResponse(ERR_OK, $info);
 }

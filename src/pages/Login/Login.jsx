@@ -23,7 +23,7 @@ const validate = (values) => {
 export function Login(props) {
   let history = useHistory();
   const [loading, setLoading] = useState(false);
-  const [pageLoading, setPageLoading] = useState(true);
+  const [pageLoading, setPageLoading] = useState(false);
   const { addToast } = useToasts();
 
   useEffect(() => {
@@ -48,6 +48,8 @@ export function Login(props) {
       password: "",
     },
     validate,
+    validateOnChange: false,
+    validateOnBlur: false,
     onSubmit: (values) => {
       setLoading(true);
       console.log(values);
@@ -87,7 +89,7 @@ export function Login(props) {
   if (pageLoading) {
     return (
       <div className="loading_block">
-        <h3 className="loading_header">YummiDVFU</h3>
+        <h3 className="loading_header">DVFU.Food</h3>
         <CircularProgress className="circular_progress" />
       </div>
     );
@@ -97,7 +99,7 @@ export function Login(props) {
     <div className="modal">
       <div className="modal_header-container">
         <div className="modal_header-block">
-          <h2 className="modal_header-text">YummiDVFU</h2>
+          <h2 className="modal_header-text">DVFU.Food</h2>
           <span className="modal_header-subtext">
             Экономь ресурсы для важного
           </span>

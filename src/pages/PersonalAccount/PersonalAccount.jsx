@@ -23,7 +23,7 @@ const validate = (values) => {
 export function PersonalAccount(props) {
   let history = useHistory();
   const [loading, setLoading] = useState(false);
-  const [pageLoading, setPageLoading] = useState(true);
+  const [pageLoading, setPageLoading] = useState(false);
 
   useEffect(() => {
     $.post(
@@ -98,7 +98,7 @@ export function PersonalAccount(props) {
   if (pageLoading) {
     return (
       <div className="loading_block">
-        <h3 className="loading_header">YummiDVFU</h3>
+        <h3 className="loading_header">DVFU.Food</h3>
         <CircularProgress className="circular_progress" />
       </div>
     );

@@ -48,7 +48,7 @@
 }
 
 .modal_header-container {
-  background-color: #1676f3;
+  background-color: #ff5500;
   padding: 14px;
   box-sizing: border-box;
   border-radius: 4px 4px 0px 0px;
@@ -134,7 +134,7 @@
 
 .modal_form__submit {
   border: none;
-  background-color: #1676f3;
+  background-color:#ff5500;
   border-radius: 4px;
   width: 100%;
   text-align: center;
@@ -177,9 +177,23 @@
   margin: 5px 0 5px 0;
 }
 
+.page{
+  box-sizing: border-box;
+  max-width: 800px;
+  padding: 0 15px 0 15px;
+  margin: 0 auto;
+}
+
 /* Hover-effects */
 .modal_form__submit:hover{
   cursor: pointer;
+}
+
+/* Media-requests */
+@media(max-width: 750px){
+  .page{
+    padding: 0;
+  }
 }
 @keyframes App-logo-spin {
   from {

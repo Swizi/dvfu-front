@@ -4,6 +4,17 @@ import { Link, useHistory } from "react-router-dom";
 import $ from "jquery";
 import { useFormik } from "formik";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Select from "@material-ui/core/Select";
+import FormControl from "@material-ui/core/FormControl";
+import MenuItem from "@material-ui/core/MenuItem";
+import { MiniApplication } from "../../components/MiniApplication/MiniApplication";
+import { Menu } from "../../components/Menu/Menu";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import IconButton from "@material-ui/core/IconButton";
+
+import Modal from '@material-ui/core/Modal';
+
+import "./Applications.css"
 
 const validate = (values) => {
   const errors = {};
@@ -22,7 +33,9 @@ const validate = (values) => {
 export function Applications(props) {
   let history = useHistory();
   const [loading, setLoading] = useState(false);
-  const [pageLoading, setPageLoading] = useState(true);
+  const [pageLoading, setPageLoading] = useState(false);
+  const [sortOption, setSortOption] = useState("new");
+  const [applications, setApplications] = useState([]);
 
   useEffect(() => {
     $.post(
@@ -35,59 +48,68 @@ export function Applications(props) {
         if (response.status !== 0) {
           history.push("/");
         }
+      }
+    );
+    $.post(
+      `/ajax/get_application.php`,
+      {
+        target: "get-application-list",
+      },
+      function (data) {
+        var response = $.parseJSON(data);
+        console.log("Response = ", response);
+        if (response.status == 0) {
+          setApplications(response);
+        }
         setPageLoading(false);
       }
     );
   }, []);
 
-  const formik = useFormik({
-    initialValues: {
-      login: "",
-      password: "",
-    },
-    validate,
-    onSubmit: (values) => {
-      setLoading(true);
-      console.log(values);
-      $.post(
-        `/ajax/login.php`,
-        {
-          target: "logination",
-          login: values.login,
-          password: values.password,
-        },
-        function (data) {
-          var response = $.parseJSON(data);
-          console.log(response);
-          // if (response.status == 0) {
-          // setRedirect(true);
-          // } else if (response.status == 3){
-          // setError(true);
-          // setRedirect(false);
-          // setErrorText('Логин уже занят!');
-          // } else {
-          // setError(true);
-          // setRedirect(false);
-          // setErrorText('');
-          // }
-          // setLoadingAlert(false);
-          setLoading(false);
-        }
-      );
-    },
-  });
+  useEffect(() => {
+    // alert("Sorting...");
+  }, [sortOption]);
 
   if (pageLoading) {
     return (
       <div className="loading_block">
-        <h3 className="loading_header">YummiDVFU</h3>
+        <h3 className="loading_header">DVFU.Food</h3>
         <CircularProgress className="circular_progress" />
       </div>
     );
   }
 
-  return <div className="page">
-      <Link to="/PersonalAccount">Личный кабинет</Link>
-      Здесь будут заявки
-  </div>;
+  const sortApplications = (event) => {
+    setSortOption(event.target.value);
+  };
+
+  const openApplication = (app_id) => {
+    alert("App id = ", app_id);
+  }
+
+  return (
+    <div className="page">
+      <Menu />
+      <div className="applications-container">
+        <FormControl>
+          <Select
+            value="new"
+            onChange={sortApplications}
+            inputProps={{ "aria-label": "Without label" }}
+          >
+            <MenuItem value="new">Сначала новые</MenuItem>
+            <MenuItem value="old">Сначала старые</MenuItem>
+          </Select>
+        </FormControl>
+        <div className="applications">
+          {applications.map((application, index) => (
+            <MiniApplication application={application} key={index}/>
+          ))}{" "}
+        </div>
+      </div>
+      <IconButton>
+        <AddCircleIcon style={{ color: "#ff5500" }} />
+      </IconButton>
+    </div>
+  );
 }

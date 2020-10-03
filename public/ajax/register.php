@@ -31,6 +31,9 @@ $query = "INSERT INTO users (firstname, lastname, telephone_number, social_media
 makeQuery($query);
 $query = "SELECT id FROM users WHERE login = '{$login}';";
 $id = mqagd($query)['id'];
+$code = getCode(5);
+$query = "INSERT INTO tg_bots (user_id, verification_code) VALUES ({$id}, '{$code}');";
+makeQuery($query);
 
 sessionPut('user_id', $id);
 sessionPut('user_session_hash', $hash);
