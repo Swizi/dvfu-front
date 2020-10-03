@@ -1,3 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
 .App {
   text-align: center;
 }
@@ -28,6 +34,153 @@
   color: #61dafb;
 }
 
+.page {
+  width: 100%;
+}
+
+.modal {
+  max-width: 355px;
+  margin: 10px auto;
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  border-radius: 4px 4px 4px 4px;
+}
+
+.modal_header-container {
+  background-color: #1676f3;
+  padding: 14px;
+  box-sizing: border-box;
+  border-radius: 4px 4px 0px 0px;
+}
+
+.modal_header-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.modal_header-text {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 57px;
+  color: #ffffff;
+}
+
+.modal_header-subtext {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 183.85%;
+  /* or 28px */
+
+  color: #ffffff;
+}
+
+.modal_form__header-text {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 123.05%;
+  /* or 34px */
+
+  color: #000000;
+}
+
+.modal_form {
+  max-width: 355px;
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* .modal_form__label {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: rgba(27, 43, 65, 0.72);
+} */
+
+.modal_form__input-text {
+  border: none;
+  background-color: rgba(26, 56, 96, 0.1);
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 7px 10px 7px 10px;
+  margin: 15px 0 0 0;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  /* identical to box height, or 137% */
+
+  /* Body Text (Light) */
+
+  color: rgba(24, 39, 58, 0.94);
+}
+
+.modal_form__submit {
+  border: none;
+  background-color: #1676f3;
+  border-radius: 4px;
+  width: 100%;
+  text-align: center;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  padding: 8px 0 8px 0;
+  color: #fff;
+  margin: 30px 0 0 0;
+}
+
+.modal_form_bottom__link {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 18px;
+  text-align: center;
+  margin: 15px 0 0 0;
+  color: #1676f3;
+  text-decoration: none;
+}
+
+.form_bottom{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.error_text{
+  color:#ff0fff;
+  font-size: 14px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  margin: 5px 0 5px 0;
+}
+
+/* Hover-effects */
+.modal_form__submit:hover{
+  cursor: pointer;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

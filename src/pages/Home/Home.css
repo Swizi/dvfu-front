@@ -1,0 +1,30 @@
+.home_page-container {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../../images/wave.svg);
+  height: 100vh;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal_mobile{
+  max-width: 355px;
+  margin: 10px auto;
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  border-radius: 4px 4px 4px 4px;
+  display: none;
+}
+
+@media(max-width: 500px){
+  .home_page-container{
+    display: none;
+  }
+  .modal_mobile{
+    display: block;
+  }
+}
