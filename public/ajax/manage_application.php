@@ -7,13 +7,9 @@ require_once('../inc/common.inc.php');
 header("Access-Control-Allow-Origin: *");
 
 //functions
-function createApplication($data)
+function createApplication($title, $description, $price)
 {
-  $title = $data['title'];
-  $price = $data['price'];
-  $authorId = $data['author_id'];
-  $description = $data['description'];
-
+  $authorId = sessionGet('user_id');
   date_default_timezone_set('UTC');
   $publicationDate = date(DATE_RFC822);
   $query = "INSERT INTO applications (title, price, author_id, description, publication_date) VALUES ('{$title}', '{$price}', '{$authorId}', '{$description}', '{$publicationDate}');";
@@ -45,11 +41,13 @@ checkAuth();
 //success
 switch ($target) {
 	case 'create-application':
-    $data = json_decode(methodGet('data', 'post'), JSON_OBJECT_AS_ARRAY);
-    createApplication($data);
+    $applicationTitle = methodGet('title', 'post');
+    $applicationDescription = methodGet('description', 'post');
+    $applicationPrice = methodGet('price', 'post');
+    createApplication($applicationTitle, $applicationDescription, $applicationPrice);
 		break;
 	case 'delete-application':
-		$applicationId = methodGet('applicationid', 'post');
+		$applicationId = methodGet('application_id', 'post');
 		deleteApplication($applicationId);
 		break;
 }

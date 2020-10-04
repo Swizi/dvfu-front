@@ -17,28 +17,28 @@ function getUserInfo()
 	  'fname' => $data['firstname'],
 	  'lname' => $data['lastname'],
 	  'tel' => $data['telephone_number'],
-		'sm_link' => $data['sm_link']
+		'sm_link' => $data['social_media_link']
 	];
 	$query = "SELECT verification_code FROM tg_bots WHERE user_id = {$id};";
 	$info['verification_code'] = mqagd($query)['verification_code'];
 
 	makeResponse(ERR_OK, $info);
 }
-function changeUserInfo($changes)
-{
-	$id = sessionGet('user_id');
-
-	$query = "UPDATE users SET ";
-  foreach ($changes as $change) {
-		$query = $query . $change[0] . " = '" . $change[1] . "', ";
-  }
-	$query{strlen($query)-2} = '^';
-	$query = str_replace('^', '', $query);
-	$query .= "WHERE id = {$id};";
-
-	makeQuery($query);
-	makeResponse(ERR_OK);
-}
+// function changeUserInfo($changes)
+// {
+// 	$id = sessionGet('user_id');
+//
+// 	$query = "UPDATE users SET ";
+//   foreach ($changes as $change) {
+// 		$query = $query . $change[0] . " = '" . $change[1] . "', ";
+//   }
+// 	$query{strlen($query)-2} = '^';
+// 	$query = str_replace('^', '', $query);
+// 	$query .= "WHERE id = {$id};";
+//
+// 	makeQuery($query);
+// 	makeResponse(ERR_OK);
+// }
 
 //define
 $targets = ['get-user', 'change-user'];

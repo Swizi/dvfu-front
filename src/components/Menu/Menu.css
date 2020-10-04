@@ -4,7 +4,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
+  padding: 15px 0 15px 0;
   box-sizing: border-box;
 }
 
@@ -19,6 +19,14 @@
 
 .menu_list{
   list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.menu_list li {
+  margin: 0 15px 0 0;
 }
 
 .menu_mobile{
@@ -30,22 +38,38 @@
 .menu_mobile__header-block{
   display: flex;
   width: 100%;
-  justify-content: row;
-  justify-content: flex-end;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   background-color:#ff5500;
-  padding: 15px;
+  padding: 10px;
   box-sizing: border-box;
+  z-index: 11;
 }
 
 .dropdown_list{
-  display: none;
+  visibility: hidden;
   background-color: #fff;
   width: 100%;
   list-style-type: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  transition: 0.3s all linear;
+  opacity: 0;
+  position: absolute;
+  top: -100px;
+  z-index: 10;
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  border-radius: 4px 4px 4px 4px;
 }
 .dropdown_active{
-  display: flex;
+  visibility: visible;
+  opacity: 1;
+  top: 78px;
 }
 
 .dropdown_list-item{
@@ -64,8 +88,28 @@
   font-weight: 500;
   text-decoration: none;
   text-transform: uppercase;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.menu__user_login{
+  font-size: 18px;
+  color: #000;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  margin: 0 10px 0 0;
+}
+
+.menu__user{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 .burger {
   width: 30px;
   height: 24px;
@@ -77,7 +121,7 @@
 .burger__line {
   display: block;
   width: 100%;
-  height: 4px;
+  height: 3px;
   background-color:#fff;
   position: absolute;
   left: 0;
@@ -113,6 +157,15 @@
 
 .burger_active .burger__line_third {
   transform: translateY(-50%) rotate(-45deg);
+}
+
+.menu__user:hover{
+  cursor: pointer;
+}
+
+.menu__user:hover .menu__user_login,
+.menu__user:hover .menu__user-icon{
+  color: #ff5500;
 }
 
 @media(max-width: 750px){

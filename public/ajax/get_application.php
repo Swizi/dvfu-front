@@ -9,7 +9,7 @@ header("Access-Control-Allow-Origin: *");
 //functions
 function getApplicationList()
 {
-  $query = "SELECT title, price, publication_date FROM applications;";
+  $query = "SELECT * FROM applications;";
   $applicationList = mqagd($query, 'array');
 
   $data = [];
@@ -40,6 +40,11 @@ function getApplication($applicationId)
   } else {
     $applicationInfo['is_accepted'] = false;
   }
+  if ($applicationInfo['author_id'] == sessionGet('user_id')) {
+    $applicationInfo['is_author'] = true;
+  } else {
+    $applicationInfo['is_author'] = false;
+  }
 
   makeResponse(ERR_OK, $applicationInfo);
 }
@@ -62,7 +67,7 @@ switch ($target) {
     getApplicationList();
 		break;
 	case 'get-application':
-		$applicationId = methodGet('applicationid', 'post');
+		$applicationId = methodGet('application_id', 'post');
 		getApplication($applicationId);
 		break;
 }

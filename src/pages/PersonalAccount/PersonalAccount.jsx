@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 
 import $ from "jquery";
 import { useFormik } from "formik";
 import CircularProgress from "@material-ui/core/CircularProgress";
+
+import { Menu } from "../../components/Menu/Menu";
+
+import "./PersonalAccount.css"
 
 const validate = (values) => {
   const errors = {};
@@ -23,7 +27,15 @@ const validate = (values) => {
 export function PersonalAccount(props) {
   let history = useHistory();
   const [loading, setLoading] = useState(false);
-  const [pageLoading, setPageLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
+  const [user, setUser] = useState({
+    login: "",
+    first_name: "",
+    last_name: "",
+    tel: 0,
+    sm_link: "",
+    code: "",
+  });
 
   useEffect(() => {
     $.post(
@@ -36,9 +48,28 @@ export function PersonalAccount(props) {
         if (response.status !== 0) {
           history.push("/");
         }
-        setPageLoading(false);
       }
     );
+    $.post(
+        `/ajax/user.php`,
+        {
+          target: "get-user",
+        },
+        function (data) {
+          var response = $.parseJSON(data);
+          if (response.status == 0) {
+            setUser({
+              login: response.login,
+              first_name: response.fname,
+              last_name: response.lname,
+              tel: response.tel,
+              sm_link: response.sm_link,
+              code: response.verification_code,
+            });
+            setPageLoading(false);
+          }
+        }
+      );
   }, []);
 
   const formik = useFormik({
@@ -49,7 +80,6 @@ export function PersonalAccount(props) {
     validate,
     onSubmit: (values) => {
       setLoading(true);
-      console.log(values);
       $.post(
         `/ajax/login.php`,
         {
@@ -59,19 +89,6 @@ export function PersonalAccount(props) {
         },
         function (data) {
           var response = $.parseJSON(data);
-          console.log(response);
-          // if (response.status == 0) {
-          // setRedirect(true);
-          // } else if (response.status == 3){
-          // setError(true);
-          // setRedirect(false);
-          // setErrorText('Логин уже занят!');
-          // } else {
-          // setError(true);
-          // setRedirect(false);
-          // setErrorText('');
-          // }
-          // setLoadingAlert(false);
           setLoading(false);
         }
       );
@@ -90,7 +107,6 @@ export function PersonalAccount(props) {
         if (response.status == 0) {
           history.push("/");
         }
-        setPageLoading(false);
       }
     );
   };
@@ -106,9 +122,42 @@ export function PersonalAccount(props) {
 
   return (
     <div className="page">
-      <Button color="secondary" onClick={logout}>
-        Выйти
-      </Button>
+      <Menu />
+      <div style={{marginTop: "20px"}}>
+        <div className="settings">
+          <h3 class="settings_header-text">Личные настройки</h3>
+          <div className="settings_data">
+            <span class="settings_left-data">Логин:</span>
+            <span class="settings_right-data">{user.login}</span>
+          </div>
+          <div className="settings_data">
+            <span class="settings_left-data">Имя:</span>
+            <span class="settings_right-data">{user.first_name}</span>
+          </div>
+          <div className="settings_data">
+            <span class="settings_left-data">Фамилия:</span>
+            <span class="settings_right-data">{user.last_name}</span>
+          </div>
+          <div className="settings_data">
+            <span class="settings_left-data">Номер телефона:</span>
+            <span class="settings_right-data">{user.tel}</span>
+          </div>
+          <div className="settings_data">
+            <span class="settings_left-data">Соц. сеть:</span>
+            <span class="settings_right-data">{user.sm_link}</span>
+          </div>
+          <Button color="secondary" onClick={logout} style={{marginTop: "15px"}}>
+          Выйти
+        </Button>
+        </div>
+        <div className="settings">
+          <h3 class="settings_header-text">Настройки бота</h3>
+          <div className="settings_data">
+            <span class="settings_left-data">Код аутентификации:</span>
+            <span class="settings_right-data">{user.code}</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

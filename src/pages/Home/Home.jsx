@@ -46,7 +46,7 @@ const validate = (values) => {
 export function Home(props) {
   let history = useHistory();
   const [loading, setLoading] = useState(false);
-  const [pageLoading, setPageLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
 
   const { addToast } = useToasts();
 
@@ -81,7 +81,6 @@ export function Home(props) {
     validateOnBlur: false,
     onSubmit: (values) => {
       setLoading(true);
-      console.log(values);
       $.post(
         `/ajax/register.php`,
         {
@@ -95,26 +94,14 @@ export function Home(props) {
         },
         function (data) {
           var response = $.parseJSON(data);
-          console.log(response);
           if (response.status == 0) {
+            localStorage.setItem('login', values.login);
             history.push("/Applications");
           } else if (response.status == 3) {
             addToast("Логин уже занят", { appearance: "error" });
           } else {
             addToast("Ошибка регистрации", { appearance: "error" });
           }
-          // if (response.status == 0) {
-          // setRedirect(true);
-          // } else if (response.status == 3){
-          // setError(true);
-          // setRedirect(false);
-          // setErrorText('Логин уже занят!');
-          // } else {
-          // setError(true);
-          // setRedirect(false);
-          // setErrorText('');
-          // }
-          // setLoadingAlert(false);
           setLoading(false);
         }
       );
@@ -269,6 +256,7 @@ export function Home(props) {
             </Link>
           </div>
         </form>
+        <img style={{marginLeft: "100px"}} src="dvfu.png" alt="DVFU"/>
       </div>
       <div className="modal_mobile">
         <div className="modal_header-container">

@@ -42,7 +42,7 @@ export function Registration(props) {
     let history = useHistory();
 
     const [loading, setLoading] = useState(false);
-    const [pageLoading, setPageLoading] = useState(false);
+    const [pageLoading, setPageLoading] = useState(true);
 
     const {addToast} = useToasts();
 
@@ -73,7 +73,6 @@ export function Registration(props) {
         validateOnBlur: false,
         onSubmit: (values) => {
             setLoading(true);
-            console.log(values);
             $.post(`/ajax/register.php`, {
                 target: "registration",
                 login: values.login,
@@ -84,27 +83,14 @@ export function Registration(props) {
                 smlink: values.sm_link
             }, function (data) {
                 var response = $.parseJSON(data);
-                console.log(response);
-                console.log(response.status);
                 if (response.status == 0) {
+                    localStorage.setItem('login', values.login);
                     history.push("/Applications");
                 } else if (response.status == 3) {
                     addToast("Логин уже занят", {appearance: "error"});
                 } else {
                     addToast("Ошибка регистрации", {appearance: "error"});
                 }
-                // if (response.status == 0) {
-                // setRedirect(true);
-                // } else if (response.status == 3){
-                // setError(true);
-                // setRedirect(false);
-                // setErrorText('Логин уже занят!');
-                // } else {
-                // setError(true);
-                // setRedirect(false);
-                // setErrorText('');
-                // }
-                // setLoadingAlert(false);
                 setLoading(false);
             });
         }

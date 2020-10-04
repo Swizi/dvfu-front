@@ -1,0 +1,25 @@
+.mini_application {
+  width: 100%;
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  border-radius: 4px 4px 4px 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0 0 15px 0;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.mini_app__header-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.mini_app__price{
+  margin: 10px 0 10px 0;
+}

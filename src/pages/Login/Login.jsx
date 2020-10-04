@@ -23,7 +23,7 @@ const validate = (values) => {
 export function Login(props) {
   let history = useHistory();
   const [loading, setLoading] = useState(false);
-  const [pageLoading, setPageLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
   const { addToast } = useToasts();
 
   useEffect(() => {
@@ -52,7 +52,6 @@ export function Login(props) {
     validateOnBlur: false,
     onSubmit: (values) => {
       setLoading(true);
-      console.log(values);
       $.post(
         `/ajax/login.php`,
         {
@@ -62,24 +61,12 @@ export function Login(props) {
         },
         function (data) {
           var response = $.parseJSON(data);
-          console.log(response);
           if (response.status == 0) {
+            localStorage.setItem("login", values.login);
             history.push("/Applications");
           } else {
             addToast("Ошибка входа", { appearance: "error" });
           }
-          // if (response.status == 0) {
-          // setRedirect(true);
-          // } else if (response.status == 3){
-          // setError(true);
-          // setRedirect(false);
-          // setErrorText('Логин уже занят!');
-          // } else {
-          // setError(true);
-          // setRedirect(false);
-          // setErrorText('');
-          // }
-          // setLoadingAlert(false);
           setLoading(false);
         }
       );
@@ -112,7 +99,12 @@ export function Login(props) {
         className="modal_form"
       >
         <h2 className="modal_form__header-text">Логинация</h2>
-        {loading && <CircularProgress className="circular_progress" style={{margin: "10px 0 10px 0"}}/>}
+        {loading && (
+          <CircularProgress
+            className="circular_progress"
+            style={{ margin: "10px 0 10px 0" }}
+          />
+        )}
         <input
           required
           id="login"

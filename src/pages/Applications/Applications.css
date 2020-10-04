@@ -1,7 +1,37 @@
-.applications-container{
+.applications-container {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  margin: 10px 0 10px 0;
+  padding: 0 10px 0 10px;
+  box-sizing: border-box;
+}
+
+.add_app {
+  position: fixed !important;
+  top: 85%;
+  left: 85%;
+}
+
+.modal_form__input-textarea {
+  border: none;
+  background-color: rgba(26, 56, 96, 0.1);
+  border-radius: 4px;
+  width: 100% !important;
+  box-sizing: border-box;
+  padding: 7px 10px 7px 10px;
+  margin: 15px 0 0 0;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  resize: vertical;
+}
+
+.applications{
+  width: 100%;
+  margin: 15px 0 0 0;
 }
